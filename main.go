@@ -11,12 +11,15 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+var pkgVersion = "dev"
+
 type cmdOptions struct {
 	opnsenseConfig string
 	httpBind       string
 	httpPath       string
 	tlsServerCert  string
 	tlsClientCA    string
+	version        bool
 }
 
 func parseCmdOptions() cmdOptions {
@@ -31,6 +34,7 @@ func parseCmdOptions() cmdOptions {
 		"TLS server certificate (/opnsense/cert/refid in the OPNsense config)")
 	flag.StringVar(&o.tlsClientCA, "tls.client-ca", o.tlsClientCA,
 		"Trusted CA of client certificates (/opnsense/ca/refid in the OPNsense config)")
+	flag.BoolVar(&o.version, "version", false, "print version")
 	flag.Parse()
 	return o
 }
@@ -104,6 +108,10 @@ func runServer(options *cmdOptions, opnConf *OPNsenseConfig) {
 
 func main() {
 	options := parseCmdOptions()
+	if options.version {
+		println(pkgVersion)
+		return
+	}
 	log.SetFlags(LoggerFlags)
 
 	if options.opnsenseConfig == "" {
