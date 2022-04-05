@@ -1,0 +1,11 @@
+task:
+  name: "Make package"
+  only_if: $CIRRUS_TAG =~ 'v.*'
+  freebsd_instance:
+    image_family: freebsd-13-0
+  setup_script: pkg install -y git go
+  make_pkg_script: go env && make pkg
+  bin_artifacts:
+    path: work/usr/local/bin/*
+  pkg_artifacts:
+    path: work/*.pkg
