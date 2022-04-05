@@ -1,0 +1,11 @@
+name: prometheus_opnsense_exporter
+version: %%VERSION%%
+origin: sysutils/prometheus_opnsense_exporter
+comment: Prometheus exporter for OPNsense
+desc: <<EOD
+    Prometheus exporter for OPNsense's specific metrics.
+EOD
+maintainer: %%MAINTAINER%%
+www: %%WWW%%
+arch: %%ARCH%%
+prefix: %%PREFIX%%

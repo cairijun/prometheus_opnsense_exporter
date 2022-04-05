@@ -1,0 +1,19 @@
+[start]
+command:%%PREFIX%%/etc/rc.d/prometheus_opnsense_exporter start
+type:script
+message:starting prometheus_opnsense_exporter
+
+[stop]
+command:%%PREFIX%%/etc/rc.d/prometheus_opnsense_exporter stop
+type:script
+message:stopping prometheus_opnsense_exporter
+
+[status]
+command:%%PREFIX%%/etc/rc.d/prometheus_opnsense_exporter status; exit 0
+type:script_output
+message:checking prometheus_opnsense_exporter status
+
+[restart]
+command:%%PREFIX%%/etc/rc.d/prometheus_opnsense_exporter restart
+type:script
+message:restarting prometheus_opnsense_exporter

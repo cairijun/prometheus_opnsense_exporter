@@ -1,5 +1,6 @@
 # Binaries for programs and plugins
 prometheus_opnsense_exporter
+work/
 *.exe
 *.exe~
 *.dll

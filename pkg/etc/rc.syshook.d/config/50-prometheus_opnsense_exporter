@@ -1,0 +1,2 @@
+#!/bin/sh
+configctl prometheus_opnsense_exporter restart

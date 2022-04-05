@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# PROVIDE: prometheus_opnsense_exporter
+# REQUIRE: LOGIN NETWORKING FILESYSTEMS
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="prometheus_opnsense_exporter"
+rcvar="${name}_enable"
+pidfile="/var/run/${name}.pid"
+command="/usr/sbin/daemon"
+
+load_rc_config "$name"
+
+get_args() {
+    optname="$1"
+    varsfx="$2"
+    eval value=\$${name}_${varsfx}
+    if [ -n "$value" ]; then
+        echo -n " ${optname} '${value}'"
+    fi
+}
+
+command_args="-f -S -T ${name} -P ${pidfile} -u proxy -- %%PREFIX%%/bin/${name}\
+    $(get_args -http.bind bind)\
+    $(get_args -http.path path)\
+    $(get_args -tls.server-cert server_cert)\
+    $(get_args -tls.client-ca client_ca)"
+
+run_rc_command "$1"
